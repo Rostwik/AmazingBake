@@ -35,4 +35,4 @@ class OrderAdmin(admin.ModelAdmin):
 
 @admin.register(Cake)
 class CakeAdmin(admin.ModelAdmin):
-    list_filter = [('kind', admin.BooleanFieldListFilter)]
+    list_filter = ['kind']
