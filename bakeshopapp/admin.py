@@ -29,8 +29,6 @@ def export_to_csv(modeladmin, request, queryset):
         writer.writerow(data_row)
     return response
 
-export_to_csv.short_description = 'Export to CSV'
-
 
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
@@ -43,6 +41,8 @@ class OrderAdmin(admin.ModelAdmin):
         'id', 'cake',
     ]
     actions = [export_to_csv]
+
+    export_to_csv.short_description = 'Export to CSV'
 
 
 @admin.register(Level)

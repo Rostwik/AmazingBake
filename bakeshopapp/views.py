@@ -1,15 +1,17 @@
-from django.shortcuts import render
-from django.shortcuts import render, redirect
-from .forms import NewUserForm
-from django.contrib.auth import login
 from django.contrib import messages
+from django.contrib.auth import login
+from django.shortcuts import render, redirect
+
+from .forms import NewUserForm
 
 
 def index(request):
     return render(request, "index.html")
 
+
 def lk(request):
     return render(request, "base_lk.html")
+
 
 def register(request):
     if request.method == "POST":
