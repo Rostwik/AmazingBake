@@ -12,7 +12,8 @@
   - ALLOWED_HOSTS -
     Default: [] (Empty list).
     A list of strings representing the host/domain names that this Django site can serve. This is a security measure to prevent HTTP Host header attacks, which are possible even under many seemingly-safe web server configurations.
-    
+  - BITLY_TOKEN -
+    Your Bitly API access token from [bitly.com](https://dev.bitly.com/docs/getting-started/authentication/)
 
 # For developers
 ## Installation
