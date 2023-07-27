@@ -33,21 +33,16 @@ class Customer(models.Model):
 
 
 class Level(models.Model):
-    EMPTY = 'No'
-    ONE = 'ON'
-    TWO = 'TW'
-    THREE = 'TH'
     LEVEL_CHOICES = [
-        (EMPTY, 'Не выбрано'),
-        (ONE, 'Один'),
-        (TWO, 'Два'),
-        (THREE, 'Три'),
+        ('ONE', 'Один'),
+        ('TWO', 'Два'),
+        ('THREE', 'Три')
     ]
 
     name = models.CharField(
         max_length=256,
         blank=True,
-        default=EMPTY,
+        default='EMPTY',
         choices=LEVEL_CHOICES,
         verbose_name="Уровни торта",
     )
@@ -67,21 +62,16 @@ class Level(models.Model):
 
 
 class Shape(models.Model):
-    NOT_CHOSEN = 'NC'
-    CIRCLE = 'CI'
-    SQUARE = 'SQ'
-    RECTANGLE = 'RE'
     FORMS_CHOICES = [
-        (NOT_CHOSEN, 'Не выбрано'),
-        (CIRCLE, 'Круг'),
-        (SQUARE, 'Квадрат'),
-        (RECTANGLE, 'Прямоугольник'),
+        ('CIRCLE', 'Круг'),
+        ('SQUARE', 'Квадрат'),
+        ('RECTANGLE', 'Прямоугольник'),
     ]
     name = models.CharField(
         max_length=256,
         blank=True,
         choices=FORMS_CHOICES,
-        default=NOT_CHOSEN,
+        default='CIRCLE',
         verbose_name="Наименование формы",
     )
     price = models.DecimalField(
@@ -99,31 +89,22 @@ class Shape(models.Model):
 
 
 class Topping(models.Model):
-    EMPTY = 'No'
-    WITHOUT = 'WO'
-    WHITE_SOUCE = 'WS'
-    CARAMEL = 'CA'
-    MAPLE = 'MA'
-    BILBERRY = 'BB'
-    WHITE_CHOCOLATE = 'WC'
-    STRAWBERRY = 'ST'
     TOPPING_CHOICES = [
-        (EMPTY, 'Не выбрано'),
-        (WITHOUT, 'Без топпинга'),
-        (WHITE_SOUCE, 'Белый соус'),
-        (CARAMEL, 'Карамельный'),
-        (MAPLE, 'Кленовый'),
-        (BILBERRY, 'Черничный'),
-        (WHITE_CHOCOLATE, 'Молочный шоколад'),
-        (STRAWBERRY, 'Клубничный'),
+        ('WITHOUT', 'Без начинки'),
+        ('WHITE_SOUCE', 'Белый соус'),
+        ('CARAMEL', 'Карамельный'),
+        ('MAPLE', 'Кленовый'),
+        ('BILBERRY', 'Черничный'),
+        ('WHITE_CHOCOLATE', 'Молочный шоколад'),
+        ('STRAWBERRY', 'Клубничный'),
     ]
 
     name = models.CharField(
         max_length=256,
         blank=True,
-        default=EMPTY,
+        default='WITHOUT',
         choices=TOPPING_CHOICES,
-        verbose_name="Наимнование топпинга",
+        verbose_name="Наименование начинки",
     )
     price = models.DecimalField(
         max_digits=6,
@@ -135,29 +116,22 @@ class Topping(models.Model):
         return self.name
 
     class Meta:
-        verbose_name = "Топпинг"
-        verbose_name_plural = "Топпинг"
+        verbose_name = "Начинка"
+        verbose_name_plural = "Начинки"
 
 
 class Berry(models.Model):
-    EMPTY = 'NC'
-    WITHOUT = 'WO'
-    RASPBERRY = 'RA'
-    BLUEBERRY = 'BL'
-    BlACKBERRY = 'BB'
-    STRAWBERRY = 'ST'
     BERRY_CHOICES = [
-        (EMPTY, 'Не выбрано'),
-        (WITHOUT, 'Без ягод'),
-        (RASPBERRY, 'Малина'),
-        (BLUEBERRY, 'Голубика'),
-        (BlACKBERRY, 'Ежевика'),
-        (STRAWBERRY, 'Клубника'),
+        ('WITHOUT', 'Без ягод'),
+        ('RASPBERRY', 'Малина'),
+        ('BLUEBERRY', 'Голубика'),
+        ('BlACKBERRY', 'Ежевика'),
+        ('STRAWBERRY', 'Клубника'),
     ]
     name = models.CharField(
         max_length=256,
         blank=True,
-        default=EMPTY,
+        default='WITHOUT',
         choices=BERRY_CHOICES,
         verbose_name="Название ягоды",
     )
@@ -176,26 +150,19 @@ class Berry(models.Model):
 
 
 class Decor(models.Model):
-    EMPTY = 'NC'
-    WITHOUT = 'WO'
-    PISTACHIO = 'PI'
-    MERINQUE = 'ME'
-    PECAN = 'PE'
-    MARSHMALLOW = 'MM'
-    MARZIPAN = 'MC'
     DECOR_CHOICES = [
-        (EMPTY, 'Не выбрано'),
-        (WITHOUT, 'Без декора'),
-        (PISTACHIO, ' Фисташки'),
-        (MERINQUE, 'Безе'),
-        (PECAN, 'Пекан'),
-        (MARSHMALLOW, 'Маршмеллоу'),
-        (MARZIPAN, 'Марципан'),
+        ('WITHOUT', 'Без декора'),
+        ('PISTACHIO', ' Фисташки'),
+        ('HAZELNUT', ' Фундук'),
+        ('MERINQUE', 'Безе'),
+        ('PECAN', 'Пекан'),
+        ('MARSHMALLOW', 'Маршмеллоу'),
+        ('MARZIPAN', 'Марципан'),
     ]
     name = models.CharField(
         max_length=256,
         blank=True,
-        default=EMPTY,
+        default='WITHOUT',
         choices=DECOR_CHOICES,
         verbose_name="Наименование декора",
     )
@@ -209,59 +176,22 @@ class Decor(models.Model):
         return self.name
 
     class Meta:
-        verbose_name = "Декор"
-        verbose_name_plural = "Декор"
+        verbose_name = "Оформление"
+        verbose_name_plural = "Оформление"
 
 
-class Order(models.Model):
-    NEW = 'ne'
-    PAID = 'PA'
-    COOKING = 'CO'
-    IN_DELIVERY = 'IND'
-    DELIVERED = 'DE'
-
-    ORDER_STATUSES_CHOICES = [
-        (NEW, 'Создан'),
-        (PAID, 'Оплачен'),
-        (COOKING, 'Готовится'),
-        (IN_DELIVERY, 'В доставке'),
-        (DELIVERED, 'Доставлен'),
-    ]
-
-    status = models.CharField(
-        max_length=256,
-        choices=ORDER_STATUSES_CHOICES,
+class Cake(models.Model):
+    name = models.TextField(
+        "Название товарной позиции",
         blank=True,
-        default="",
-        verbose_name="Статус заказа",
     )
-    customer = models.ForeignKey(
-        Customer,
-        related_name="customers",
-        verbose_name="Заказчик",
-        on_delete=models.PROTECT,
+    kind = models.BooleanField(
+        'Признак заказного торта',
+        null=True
     )
     title = models.TextField(
-        verbose_name="Надпись",
+        verbose_name="Надпись на торте",
         blank=True,
-    )
-    comment = models.TextField(
-        verbose_name="Комментарий к заказу",
-        blank=True,
-    )
-    delivery_address = models.TextField(
-        verbose_name="Адрес доставки",
-    )
-    delivery_date = models.DateField(
-        verbose_name="Дата доставки",
-    )
-    delivery_time = models.DateTimeField(
-        verbose_name="Время доставки",
-    )
-    total = models.DecimalField(
-        max_digits=6,
-        decimal_places=2,
-        verbose_name="Стоимость заказа",
     )
     level = models.ForeignKey(
         Level,
@@ -292,6 +222,60 @@ class Order(models.Model):
         verbose_name="Декор",
         null=True,
         on_delete=models.SET_NULL,
+    )
+
+    class Meta:
+        verbose_name = "Торт"
+        verbose_name_plural = "Торты"
+
+    def __str__(self):
+        return f"Торт: {self.name}"
+
+
+class Order(models.Model):
+    ORDER_STATUSES_CHOICES = [
+        ('NEW', 'Создан'),
+        ('PAID', 'Оплачен'),
+        ('COOKING', 'Готовится'),
+        ('IN_DELIVERY', 'В доставке'),
+        ('DELIVERED', 'Доставлен'),
+    ]
+    cake = models.ForeignKey(
+        Cake,
+        related_name="orders",
+        verbose_name="Торт",
+        on_delete=models.PROTECT,
+    )
+    status = models.CharField(
+        max_length=256,
+        choices=ORDER_STATUSES_CHOICES,
+        blank=True,
+        default="NEW",
+        verbose_name="Статус заказа",
+    )
+    customer = models.ForeignKey(
+        Customer,
+        related_name="customers",
+        verbose_name="Заказчик",
+        on_delete=models.PROTECT,
+    )
+    comment = models.TextField(
+        verbose_name="Комментарий к заказу",
+        blank=True,
+    )
+    delivery_address = models.TextField(
+        verbose_name="Адрес доставки",
+    )
+    delivery_date = models.DateField(
+        verbose_name="Дата доставки",
+    )
+    delivery_time = models.DateTimeField(
+        verbose_name="Время доставки",
+    )
+    total = models.DecimalField(
+        max_digits=6,
+        decimal_places=2,
+        verbose_name="Стоимость заказа",
     )
 
     def __str__(self):

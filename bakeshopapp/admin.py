@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from bakeshopapp.models import Order, Level, Shape, Topping, Berry, Decor
+from bakeshopapp.models import Order, Level, Shape, Topping, Berry, Decor, Cake
 
 
 @admin.register(Order)
@@ -31,3 +31,8 @@ class OrderAdmin(admin.ModelAdmin):
 @admin.register(Decor)
 class OrderAdmin(admin.ModelAdmin):
     pass
+
+
+@admin.register(Cake)
+class CakeAdmin(admin.ModelAdmin):
+    list_filter = ['kind']
