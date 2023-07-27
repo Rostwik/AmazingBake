@@ -19,7 +19,7 @@ class LinkAdmin(admin.ModelAdmin):
         'title', 'url', 'bitlink', 'description',
         'active', 'created_at', 'updated_at',
     ]
-    readonly_fields = ['created_at', 'updated_at']
+    readonly_fields = ['bitlink', 'created_at', 'updated_at']
     actions = [export_to_csv]
 
     export_to_csv.short_description = 'Export to CSV'

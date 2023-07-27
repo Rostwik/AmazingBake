@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     # 'bakeshopapp.apps.BakeshopappConfig',
     'bakeshopapp',
     'marketing',
-
 ]
 
 MIDDLEWARE = [
