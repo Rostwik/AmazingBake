@@ -1,7 +1,14 @@
 from django.db import models
+from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 
 class Customer(models.Model):
+    user = models.OneToOneField(
+        User,
+        on_delete=models.CASCADE,
+    )
     phone_number = models.CharField(
         max_length=256,
         blank=True,
@@ -25,11 +32,18 @@ class Customer(models.Model):
     )
 
     def __str__(self):
-        return f"Заказчик {self.first_name} {self.last_name}"
+        return f"Заказчик {self.user.username} {self.first_name} {self.last_name}"
 
     class Meta:
         verbose_name = "Заказчик"
         verbose_name_plural = "Заказчики"
+
+
+@receiver(post_save, sender=User)
+def create_or_update_customer(sender, instance, created, **kwargs):
+    if created:
+        Customer.objects.create(user=instance)
+    instance.customer.save()
 
 
 class Level(models.Model):

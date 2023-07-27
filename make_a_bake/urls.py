@@ -19,9 +19,12 @@ from django.urls import path, include
 from django.conf.urls.static import static
 
 from make_a_bake import settings
+from bakeshopapp import views
 
 urlpatterns = [
     path('', include('bakeshopapp.urls')),
+    path('accounts/', include('django.contrib.auth.urls')),
+    path('register/', views.register, name='register'),
+    path('lk/', views.lk, name='lk'),
     path('admin/', admin.site.urls),
-    path('bakeshopapp/', include('bakeshopapp.urls'))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

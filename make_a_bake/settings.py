@@ -38,6 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'crispy_forms',
+    'crispy_bootstrap4',
+
     # 'bakeshopapp.apps.BakeshopappConfig',
     'bakeshopapp',
     'marketing',
@@ -134,3 +138,10 @@ STATICFILES_DIRS = [
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 BITLY_TOKEN = env.str('BITLY_TOKEN')
+
+LOGIN_REDIRECT_URL = '/lk'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+# for testing reset password in e-mail
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

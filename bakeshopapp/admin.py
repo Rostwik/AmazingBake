@@ -29,7 +29,6 @@ def export_to_csv(modeladmin, request, queryset):
         writer.writerow(data_row)
     return response
 
-
 export_to_csv.short_description = 'Export to CSV'
 
 
