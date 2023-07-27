@@ -2,7 +2,7 @@ import csv
 import datetime
 from django.http import HttpResponse
 from django.contrib import admin
-from django.utils.safestring import mark_safe
+
 
 from .models import Order, Level, Shape, Topping, Berry, Decor, Cake, Customer
 
@@ -38,7 +38,7 @@ class OrderAdmin(admin.ModelAdmin):
     list_display = [
         'id', 'cake', 'status', 'customer', 'comment',
         'delivery_address', 'delivery_date', 'delivery_time',
-        'total', # order_detail
+        'total',
     ]
     list_display_links = [
         'id', 'cake',
