@@ -44,6 +44,7 @@ INSTALLED_APPS = [
 
     # 'bakeshopapp.apps.BakeshopappConfig',
     'bakeshopapp',
+    'marketing',
 ]
 
 MIDDLEWARE = [
@@ -135,6 +136,8 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+BITLY_TOKEN = env.str('BITLY_TOKEN')
 
 LOGIN_REDIRECT_URL = '/lk'
 
