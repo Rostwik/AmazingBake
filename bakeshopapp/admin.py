@@ -1,8 +1,8 @@
 import csv
 import datetime
-from django.http import HttpResponse
-from django.contrib import admin
 
+from django.contrib import admin
+from django.http import HttpResponse
 
 from .models import Order, Level, Shape, Topping, Berry, Decor, Cake, Customer
 
@@ -10,7 +10,7 @@ from .models import Order, Level, Shape, Topping, Berry, Decor, Cake, Customer
 def export_to_csv(modeladmin, request, queryset):
     """Возвращает файл с данными в формате CSV"""
     opts = modeladmin.model._meta
-    content_disposition = f'attachment; filename={opts.verbose_name}.csv'
+    content_disposition = 'attachment; filename=report.csv'
     response = HttpResponse(content_type='text/csv')
     response['Content-Disposition'] = content_disposition
     writer = csv.writer(response)
