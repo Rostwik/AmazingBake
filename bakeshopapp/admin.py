@@ -40,9 +40,30 @@ class OrderAdmin(admin.ModelAdmin):
     list_display_links = [
         'id', 'cake',
     ]
-    actions = [export_to_csv]
+    actions = ['export_to_csv']
 
-    export_to_csv.short_description = 'Export to CSV'
+    @admin.action(description='Export to CSV')
+    def export_to_csv(self, request, queryset):
+        """Возвращает файл с данными в формате CSV"""
+        opts = self.model._meta
+        content_disposition = 'attachment; filename=orders.csv'
+        response = HttpResponse(content_type='text/csv')
+        response['Content-Disposition'] = content_disposition
+        writer = csv.writer(response)
+        fields = [
+            field for field in opts.get_fields()
+            if not field.many_to_many and not field.one_to_many
+        ]
+        writer.writerow([field.verbose_name for field in fields])
+        for obj in queryset:
+            data_row = []
+            for field in fields:
+                value = getattr(obj, field.name)
+                if isinstance(value, datetime.datetime):
+                    value = value.strftime('%Y-%m-%d')
+                data_row.append(value)
+            writer.writerow(data_row)
+        return response
 
 
 @admin.register(Level)
