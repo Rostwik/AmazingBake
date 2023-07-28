@@ -2,13 +2,13 @@
 {% load crispy_forms_tags %}
 
 {% block lk %}
-    <div class="container py-5">
-        <h1>Регистрация</h1>
-        <form method="POST">
-            {% csrf_token %}
-            {{ register_form|crispy }}
-            <button class="btn btn-primary" type="submit">Зарегистрироваться</button>
-        </form>
-        <p class="text-center">Если у вас уже есть аккаунт, <a href="{% url 'login' %}">войдите в него</a>.</p>
-    </div>
+  <div class="container py-5">
+    <h1>Регистрация</h1>
+    <form method="POST">
+      {% csrf_token %}
+      {{ register_form|crispy }}
+      <button class="btn btn-primary" type="submit">Зарегистрироваться</button>
+    </form>
+    <p class="text-center">Если у вас уже есть аккаунт, <a href="{% url 'login' %}">войдите в него</a>.</p>
+  </div>
 {% endblock %}
