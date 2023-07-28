@@ -16,7 +16,7 @@ class Link(models.Model):
     description = models.TextField(
         blank=True, null=True,
         verbose_name='описание')
-    active = models.BooleanField(default=True, verbose_name='активна')
+    active = models.BooleanField(default=True, verbose_name='ссылка активна')
     created_at = models.DateTimeField(
         auto_now_add=True, verbose_name='создана')
     updated_at = models.DateTimeField(auto_now=True, verbose_name='обновлена')
