@@ -119,7 +119,7 @@ def index(request):
 
     return render(
         request,
-        template_name="index.html",
+        template_name='index.html',
         context={
             'bake_elements': bake_elements,
             'bake_elements_json': bake_elements_json
@@ -129,16 +129,19 @@ def index(request):
 
 @login_required
 def lk(request):
+    customer = Customer.objects.get(user=request.user)
+    print(customer.orders.all())
+
+    #  handle user info form
     if request.method == 'POST':
         form = ChangeUserDataForm(request.POST)
         if form.is_valid():
-            customer = Customer.objects.get(user=request.user)
             customer.first_name = form.cleaned_data['first_name']
             customer.last_name = form.cleaned_data['last_name']
             customer.phone_number = form.cleaned_data['phone_number']
             customer.address = form.cleaned_data['address']
             customer.save()
-            return redirect("lk")
+            return redirect('lk')
     else:
         form = ChangeUserDataForm(
             initial={
@@ -149,19 +152,20 @@ def lk(request):
             }
         )
     context = {
-        "form": form,
+        'form': form,
+        'orders': customer.orders.all(),
     }
-    return render(request, "lk/lk.html", context)
+    return render(request, 'lk/lk.html', context)
 
 
 def register(request):
-    if request.method == "POST":
+    if request.method == 'POST':
         form = NewUserForm(request.POST)
         if form.is_valid():
             user = form.save()
             login(request, user)
-            # messages.success(request, "Вы успешно зарегистрировались.")
-            return redirect("lk")
-        messages.error(request, "Не удалось зарегистрироваться.")
+            # messages.success(request, 'Вы успешно зарегистрировались.')
+            return redirect('lk')
+        messages.error(request, 'Не удалось зарегистрироваться.')
     form = NewUserForm()
-    return render(request=request, template_name="registration/register.html", context={"register_form": form})
+    return render(request=request, template_name='registration/register.html', context={'register_form': form})
