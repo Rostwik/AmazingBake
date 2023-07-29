@@ -1,7 +1,9 @@
-{% extends "base_lk.html" %}
+{% extends "lk/base_lk.html" %}
 
 {% block lk %}
+
+<h1 class="font_Gogh fs_40 cake_blue">Личный кабинет</h1>
 <p>Вы вышли</p>
 
-<a href="{% url 'login'%}">Нажмите сюда, чтобы залогиниться снова</a>
+<a href="{% url 'login' %}">Нажмите сюда, чтобы залогиниться снова</a>
 {% endblock %}

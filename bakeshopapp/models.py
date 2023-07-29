@@ -245,7 +245,7 @@ class Order(models.Model):
     )
     customer = models.ForeignKey(
         Customer,
-        related_name="customers",
+        related_name="orders",
         verbose_name="Заказчик",
         on_delete=models.PROTECT,
     )
