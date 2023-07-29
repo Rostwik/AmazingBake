@@ -1,0 +1,40 @@
+{% extends "lk/base_lk.html" %}
+{% load static %}
+{% block lk %}
+    <h1 class="font_Gogh fs_40 cake_blue">Личный кабинет</h1>
+    <div class="d-flex w-100 justify-content-center justify-content-xxl-between align-items-center">
+        <form method="post" action="/lk/" class="pt-header text-center">
+        {% csrf_token %}
+        {% if form.errors %}
+          <p>Данные неверны. Попробуйте еще раз.</p>
+        {% endif %}
+            <table>
+                <tr>
+                  <td>{{ form.first_name.label_tag }}</td>
+                  <td>{{ form.first_name }}</td>
+                </tr>
+                <tr>
+                  <td>{{ form.last_name.label_tag }}</td>
+                  <td>{{ form.last_name }}</td>
+                </tr>
+                <tr>
+                  <td>{{ form.phone_number.label_tag }}</td>
+                  <td>{{ form.phone_number }}</td>
+                </tr>
+                <tr>
+                  <td>{{ form.address.label_tag }}</td>
+                  <td>{{ form.address }}</td>
+                </tr>
+            </table>
+            <button class="btn text-white rounded-pill align-self-end px-5 mt-3 shadow-none cake__button cake__bg_pink">Сохранить</button>
+        </form>
+    </div>
+
+
+  <h2 class="fs_40 cake_pink mt-5">Мои заказы</h2>
+  <span class="cake_grey">У вас еще нет заказов.</span>
+  <p class="cake_grey">Вы можете добавить торт из <a href="../index.html#step2" class="text-decoration-none cake_pink">Каталога</a> или <a href="../index.html#step3" class="text-decoration-none cake_pink">Создать свой</a>.</p>
+  <span class="cake_grey">Есть вопросы?</span>
+  <span class="cake_grey">Воспользуйтесь нашим <a href="https://vk.com/devmanorg" class="text-decoration-none cake_pink">чат-ботом</a>.</span>
+  <a class="btn text-white rounded-pill align-self-end px-5 mt-3 shadow-none cake__button cake__bg_pink" href="{% url 'logout' %}">Выйти</a>
+{% endblock %}

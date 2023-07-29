@@ -1,4 +1,4 @@
-{% extends "../base_lk.html" %}
+{% extends "lk/base_lk.html" %}
 {% load static %}
 {% block lk %}
     <h1 class="font_Gogh fs_40 cake_blue">Личный кабинет</h1>
@@ -21,7 +21,6 @@
                   <td align="right">
                       <input type="submit" value="login" />
                       <input type="hidden" name="next" value="{{ next }}" />
-
                   </td>
                 </tr>
             </table>

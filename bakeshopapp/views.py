@@ -5,10 +5,10 @@ from django.contrib.auth import login
 from django.contrib.auth.models import User
 from django.db import IntegrityError
 from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
 
-from .forms import NewUserForm
 from .models import Level, Shape, Topping, Berry, Decor, Customer, Bake, Order
-
+from .forms import NewUserForm, ChangeUserDataForm
 
 def index(request):
 
@@ -127,8 +127,31 @@ def index(request):
     )
 
 
+@login_required
 def lk(request):
-    return render(request, "base_lk.html")
+    if request.method == 'POST':
+        form = ChangeUserDataForm(request.POST)
+        if form.is_valid():
+            customer = Customer.objects.get(user=request.user)
+            customer.first_name = form.cleaned_data['first_name']
+            customer.last_name = form.cleaned_data['last_name']
+            customer.phone_number = form.cleaned_data['phone_number']
+            customer.address = form.cleaned_data['address']
+            customer.save()
+            return redirect("lk")
+    else:
+        form = ChangeUserDataForm(
+            initial={
+                'first_name': request.user.customer.first_name,
+                'last_name': request.user.customer.last_name,
+                'phone_number': request.user.customer.phone_number,
+                'address': request.user.customer.address,
+            }
+        )
+    context = {
+        "form": form,
+    }
+    return render(request, "lk/lk.html", context)
 
 
 def register(request):
