@@ -4,7 +4,7 @@ import datetime
 from django.contrib import admin
 from django.http import HttpResponse
 
-from .models import Order, Level, Shape, Topping, Berry, Decor, Cake, Customer
+from .models import Order, Level, Shape, Topping, Berry, Decor, Bake, Customer
 
 
 def export_to_csv(modeladmin, request, queryset):
@@ -33,12 +33,12 @@ def export_to_csv(modeladmin, request, queryset):
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
     list_display = [
-        'id', 'cake', 'status', 'customer', 'comment',
+        'id', 'bake', 'status', 'customer', 'comment',
         'delivery_address', 'delivery_date', 'delivery_time',
         'total',
     ]
     list_display_links = [
-        'id', 'cake',
+        'id', 'bake',
     ]
     actions = ['export_to_csv']
 
@@ -91,8 +91,8 @@ class DecorAdmin(admin.ModelAdmin):
     pass
 
 
-@admin.register(Cake)
-class CakeAdmin(admin.ModelAdmin):
+@admin.register(Bake)
+class BakeAdmin(admin.ModelAdmin):
     list_filter = ['kind']
 
 

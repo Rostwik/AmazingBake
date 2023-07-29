@@ -69,15 +69,9 @@ class Level(models.Model):
 
 
 class Shape(models.Model):
-    FORMS_CHOICES = [
-        ('CIRCLE', 'Круг'),
-        ('SQUARE', 'Квадрат'),
-        ('RECTANGLE', 'Прямоугольник'),
-    ]
     name = models.CharField(
         max_length=256,
         blank=True,
-        choices=FORMS_CHOICES,
         default='CIRCLE',
         verbose_name="Наименование формы",
     )
@@ -96,21 +90,10 @@ class Shape(models.Model):
 
 
 class Topping(models.Model):
-    TOPPING_CHOICES = [
-        ('WITHOUT', 'Без начинки'),
-        ('WHITE_SOUCE', 'Белый соус'),
-        ('CARAMEL', 'Карамельный'),
-        ('MAPLE', 'Кленовый'),
-        ('BILBERRY', 'Черничный'),
-        ('WHITE_CHOCOLATE', 'Молочный шоколад'),
-        ('STRAWBERRY', 'Клубничный'),
-    ]
-
     name = models.CharField(
         max_length=256,
         blank=True,
         default='WITHOUT',
-        choices=TOPPING_CHOICES,
         verbose_name="Наименование начинки",
     )
     price = models.DecimalField(
@@ -187,7 +170,7 @@ class Decor(models.Model):
         verbose_name_plural = "Оформление"
 
 
-class Cake(models.Model):
+class Bake(models.Model):
     name = models.TextField(
         "Название товарной позиции",
         blank=True,
@@ -206,7 +189,7 @@ class Cake(models.Model):
         null=True,
         on_delete=models.SET_NULL,
     )
-    form = models.ForeignKey(
+    shape = models.ForeignKey(
         Shape,
         verbose_name="Форма",
         null=True,
@@ -247,8 +230,8 @@ class Order(models.Model):
         ('IN_DELIVERY', 'В доставке'),
         ('DELIVERED', 'Доставлен'),
     ]
-    cake = models.ForeignKey(
-        Cake,
+    bake = models.ForeignKey(
+        Bake,
         related_name="orders",
         verbose_name="Торт",
         on_delete=models.PROTECT,
