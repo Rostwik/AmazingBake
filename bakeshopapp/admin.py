@@ -78,7 +78,7 @@ class ShapeAdmin(admin.ModelAdmin):
 
 @admin.register(Topping)
 class ToppingAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('id', 'name')
 
 
 @admin.register(Berry)

@@ -47,17 +47,10 @@ def create_or_update_customer(sender, instance, created, **kwargs):
 
 
 class Level(models.Model):
-    LEVEL_CHOICES = [
-        ('ONE', 'Один'),
-        ('TWO', 'Два'),
-        ('THREE', 'Три')
-    ]
-
     name = models.CharField(
         max_length=256,
         blank=True,
         default='EMPTY',
-        choices=LEVEL_CHOICES,
         verbose_name="Уровни торта",
     )
 
@@ -283,7 +276,7 @@ class Order(models.Model):
     delivery_date = models.DateField(
         verbose_name="Дата доставки",
     )
-    delivery_time = models.DateTimeField(
+    delivery_time = models.TimeField(
         verbose_name="Время доставки",
     )
     total = models.DecimalField(
