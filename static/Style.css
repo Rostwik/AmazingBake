@@ -181,3 +181,14 @@ li .cake__textinput:read-only {
     background-color: #fff;
     border-width: 0;
 }
+.btn-outline-success {
+    border-color: #DA87A9;
+    color: #DA87A9;
+}
+.btn-outline-success:hover {
+    border-color: #DA87A9;
+    background-color: #DA87A9;
+}
+.navbar .container-md {
+    display: block;
+}

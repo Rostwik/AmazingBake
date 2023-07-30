@@ -6,8 +6,9 @@ from django.contrib.auth.models import User
 from django.db import IntegrityError
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+from django.shortcuts import get_object_or_404
 
-from .models import Level, Shape, Topping, Berry, Decor, Customer, Bake, Order
+from .models import Level, Shape, Topping, Berry, Decor, Customer, Bake, Order, BakeCategory
 from .forms import NewUserForm, ChangeUserDataForm
 
 def index(request):
@@ -170,8 +171,15 @@ def register(request):
     return render(request=request, template_name='registration/register.html', context={'register_form': form})
 
 
-def catalog(request):
+def catalog(request, category=None):
+    bakes = Bake.objects.filter(kind=False)
+    if category:
+        bakes = bakes.filter(category=category)
+        category = get_object_or_404(BakeCategory, pk=category)
+
     context = {
-        'bakes': Bake.objects.filter(kind=False)
+        'bakes': bakes,
+        'current_category': category,
+        'categories': BakeCategory.objects.all()
     }
     return render(request=request, template_name='catalog.html', context=context)
