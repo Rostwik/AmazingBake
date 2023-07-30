@@ -219,6 +219,11 @@ class Bake(models.Model):
         null=True,
         blank = True,
     )
+    description = models.TextField(
+        'Описание торта',
+        null=True,
+        blank=True,
+    )
 
     class Meta:
         verbose_name = "Торт"
