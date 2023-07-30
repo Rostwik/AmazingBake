@@ -225,6 +225,14 @@ class Bake(models.Model):
         blank=True,
     )
 
+    def get_price(self):
+        price = self.level.price + \
+               self.shape.price + \
+               self.topping.price + \
+               self.berries.price + \
+               self.decor.price
+        return int(price)
+
     class Meta:
         verbose_name = "Торт"
         verbose_name_plural = "Торты"

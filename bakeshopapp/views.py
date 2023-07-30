@@ -130,7 +130,6 @@ def index(request):
 @login_required
 def lk(request):
     customer = Customer.objects.get(user=request.user)
-    print(customer.orders.all())
 
     #  handle user info form
     if request.method == 'POST':
@@ -169,3 +168,10 @@ def register(request):
         messages.error(request, 'Не удалось зарегистрироваться.')
     form = NewUserForm()
     return render(request=request, template_name='registration/register.html', context={'register_form': form})
+
+
+def catalog(request):
+    context = {
+        'bakes': Bake.objects.filter(kind=False)
+    }
+    return render(request=request, template_name='catalog.html', context=context)

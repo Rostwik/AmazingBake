@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Каталог тортов{% endblock %}
+
+{% block content %}
+    <div class="container mt-header">
+        <h1 class="font_Gogh fs_40 cake_blue text-center mb-3">Каталог тортов</h1>
+        <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-3 g-4">
+            {% for bake in bakes %}
+                <div class="col">
+                  <div class="card">
+                    <img src="{{ bake.image.url }}" class="card-img-top" alt="{{ bake.name }}">
+                    <div class="card-body">
+                      <h5 class="card-title">{{ bake.name }}</h5>
+                      <p class="card-text">{{ bake.description }}</p>
+                    </div>
+                    <div class="card-footer">
+                      <span class="card-price">{{ bake.get_price }} руб. </span>
+                      <button class="btn text-white rounded-pill shadow-none cake__button cake__bg_pink">Купить</button>
+                    </div>
+                  </div>
+                </div>
+            {% empty %}
+                К сожалению, тут тортов нет :(
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

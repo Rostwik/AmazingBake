@@ -133,37 +133,51 @@ li .cake__textinput:read-only {
 .z-index-1 {
     z-index: -1;
 }
-
 .accordion {
     transition: 0.4s;
 }
-
 .panel {
     padding: 0 18px;
     background-color: white;
     display: none;
     overflow: hidden;
 }
-
 .panel table {
     min-width: 400px;
 }
-
 .panel table td{
     font-size: 14px;
 }
-
 .user_info {
     margin: 20px 0;
 }
-
 .user_info input{
     border: 1px solid #ddd;
     padding: 3px 6px;
     border-radius: 5px;
     margin: 5px 0;
 }
-
 .lk_title {
     margin-top: 20px;
+}
+.card {
+    padding:30px;
+    border: none;
+}
+.card-price{
+    font-size: 24px;
+    padding-right: 20px;
+}
+.card-text{
+    font-size: 14px;
+}
+
+.card img {
+    max-height: 270px;
+    object-fit: cover;
+}
+.card-footer {
+    text-align: right;
+    background-color: #fff;
+    border-width: 0;
 }

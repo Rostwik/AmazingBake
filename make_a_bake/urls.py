@@ -23,7 +23,8 @@ from django.urls import path, include
 
 
 urlpatterns = [
-    path('', include('bakeshopapp.urls')),
+    path('', views.index, name='index'),
+    path('catalog/', include('bakeshopapp.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
     path('register/', views.register, name='register'),
     path('lk/', views.lk, name='lk'),
