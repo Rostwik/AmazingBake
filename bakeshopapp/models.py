@@ -213,6 +213,12 @@ class Bake(models.Model):
         null=True,
         on_delete=models.SET_NULL,
     )
+    image = models.ImageField(
+        'Изображение торта',
+        upload_to='bakes/',
+        null=True,
+        blank = True,
+    )
 
     class Meta:
         verbose_name = "Торт"
