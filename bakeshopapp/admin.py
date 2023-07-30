@@ -4,7 +4,7 @@ import datetime
 from django.contrib import admin
 from django.http import HttpResponse
 
-from .models import Order, Level, Shape, Topping, Berry, Decor, Bake, Customer
+from .models import Order, Level, Shape, Topping, Berry, Decor, Bake, Customer, BakeCategory
 
 
 def export_to_csv(modeladmin, request, queryset):
@@ -98,4 +98,8 @@ class BakeAdmin(admin.ModelAdmin):
 
 @admin.register(Customer)
 class CustomerAdmin(admin.ModelAdmin):
+    pass
+
+@admin.register(BakeCategory)
+class BakeCategoryAdmin(admin.ModelAdmin):
     pass

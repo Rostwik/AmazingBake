@@ -170,14 +170,46 @@ class Decor(models.Model):
         verbose_name_plural = "Оформление"
 
 
+class BakeCategory(models.Model):
+    name = models.CharField(
+        'Название категории',
+        max_length=250,
+    )
+
+    class Meta:
+        verbose_name = "Категория"
+        verbose_name_plural = "Категории"
+
+    def __str__(self):
+        return f"{self.name}"
+
+
 class Bake(models.Model):
     name = models.TextField(
         "Название товарной позиции",
         blank=True,
     )
+    description = models.TextField(
+        'Описание торта',
+        null=True,
+        blank=True,
+    )
+    category = models.ForeignKey(
+        BakeCategory,
+        verbose_name="Категория",
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+    )
+    image = models.ImageField(
+        'Изображение торта',
+        upload_to='bakes/',
+        null=True,
+        blank = True,
+    )
     kind = models.BooleanField(
         'Признак заказного торта',
-        null=True
+        null=True,
     )
     title = models.TextField(
         verbose_name="Надпись на торте",
@@ -213,17 +245,7 @@ class Bake(models.Model):
         null=True,
         on_delete=models.SET_NULL,
     )
-    image = models.ImageField(
-        'Изображение торта',
-        upload_to='bakes/',
-        null=True,
-        blank = True,
-    )
-    description = models.TextField(
-        'Описание торта',
-        null=True,
-        blank=True,
-    )
+
 
     def get_price(self):
         price = self.level.price + \
