@@ -26,6 +26,13 @@
                   <td>{{ form.address }}</td>
                 </tr>
             </table>
+            <div class="mt-4 text-sm text-gray font-nova">
+                Нажимая на кнопку, я даю согласие на обработку и подтверждаю, что ознакомлен с условиями
+                <a class="text-blue" target="_blank" href="{%static 'privacy-policy.pdf' %}" rel="noreferrer">
+                    политики обработки персональных данных
+                </a>.
+            </div>
+
             <button class="btn text-white rounded-pill align-self-end px-5 mt-3 shadow-none cake__button cake__bg_pink">Сохранить</button>
             <br>
           <a class="btn text-white rounded-pill align-self-end px-5 mt-3 shadow-none cake__button cake__bg_pink" href="{% url 'logout' %}">Выйти</a>
