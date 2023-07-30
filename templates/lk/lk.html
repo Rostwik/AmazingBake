@@ -36,7 +36,7 @@
   {% for order in orders %}
     <section class="my-2">
         <span class="cake_blue lk__order d-flex accordion">
-            Заказ #{{ order.id }}: Торт {{ order.cake.name }} - {{ order.total }} руб.
+            Заказ #{{ order.id }}: Торт {{ order.bake.name }} - {{ order.total }} руб.
         </span>
         <div class="panel">
             <table>
@@ -50,15 +50,15 @@
                 </tr>
                 <tr>
                     <td>Уровней:</td>
-                    <td>{{ order.cake.level|default:"нет" }}</td>
+                    <td>{{ order.bake.level|default:"нет" }}</td>
                 </tr>
                 <tr>
                     <td>Форма:</td>
-                    <td>{{ order.cake.form|default:"нет" }}</td>
+                    <td>{{ order.bake.form|default:"нет" }}</td>
                 </tr>
                 <tr>
                     <td>Топпинг:</td>
-                    <td>{{ order.cake.topping|default:"нет" }}</td>
+                    <td>{{ order.bake.topping|default:"нет" }}</td>
                 </tr>
                 <tr>
                     <td>Ягоды:</td>
@@ -66,43 +66,20 @@
                 </tr>
                 <tr>
                     <td>Декор:</td>
-                    <td>{{ order.cake.decor|default:"нет" }}</td>
+                    <td>{{ order.bake.decor|default:"нет" }}</td>
                 </tr>
                 <tr>
                     <td>Надпись:</td>
-                    <td>{{ order.cake.title|default:"нет" }}</td>
+                    <td>{{ order.bake.title|default:"нет" }}</td>
                 </tr>
             </table>
         </div>
-        <aside class="modal fade" id="OrderModal1" tabindex="-1" aria-labelledby="ModalLabel1" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title cake_pink" id="ModalLabel1">#45575879537 Торт “Черепаха”</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <span class="cake_blue">Уровней: 2</span><br>
-                        <span class="cake_blue">Форма: квадрат</span><br>
-                        <span class="cake_blue">Топпинг: белый соус</span><br>
-                        <span class="cake_blue">Ягоды: безе</span><br>
-                        <span class="cake_blue">Декор: нет</span><br>
-                        <span class="cake_blue">С днём рождения</span><br>
-                        <span class="cake_pink">Цена: 2550₽</span>
-                    </div>
-                    <div class="modal-footer d-flex justify-content-between">
-                        <span class="cake_blue">Статус: Выполнен</span>
-                        <span class="cake_blue">Время доставки: ?</span>
-                    </div>
-                </div>
-            </div>
-        </aside>
     </section>
   {% empty %}
-  <span class="cake_grey">У вас еще нет заказов.</span>
-  <p class="cake_grey">Вы можете добавить торт из <a href="../index.html#step2" class="text-decoration-none cake_pink">Каталога</a> или <a href="../index.html#step3" class="text-decoration-none cake_pink">Создать свой</a>.</p>
-  <span class="cake_grey">Есть вопросы?</span>
-  <span class="cake_grey">Воспользуйтесь нашим <a href="https://vk.com/devmanorg" class="text-decoration-none cake_pink">чат-ботом</a>.</span>
+      <span class="cake_grey">У вас еще нет заказов.</span>
+      <p class="cake_grey">Вы можете добавить торт из <a href="../index.html#step2" class="text-decoration-none cake_pink">Каталога</a> или <a href="../index.html#step3" class="text-decoration-none cake_pink">Создать свой</a>.</p>
+      <span class="cake_grey">Есть вопросы?</span>
+      <span class="cake_grey">Воспользуйтесь нашим <a href="https://vk.com/devmanorg" class="text-decoration-none cake_pink">чат-ботом</a>.</span>
   {% endfor %}
 
 {% endblock %}
