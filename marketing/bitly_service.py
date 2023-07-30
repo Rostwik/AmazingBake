@@ -27,7 +27,7 @@ def get_count_clicks(token, short_link, unit='day'):
     }
     params = (
         ('unit', unit),
-        ('units', '-1'),
+        ('units', '1'),
     )
     response = requests.get(url=url, headers=headers, params=params)
     response.raise_for_status()
