@@ -175,6 +175,13 @@ class BakeCategory(models.Model):
         'Название категории',
         max_length=250,
     )
+    image = models.ImageField(
+        'Картинка категории',
+        upload_to='categories/',
+        null=True,
+        blank = True,
+    )
+
 
     class Meta:
         verbose_name = "Категория"
