@@ -291,7 +291,13 @@
 								<span class="cake_pink fs_40 fw-bold me-2">Итого: {{ Cost }}₽</span>
 								{% endverbatim %}
 							</div>
-							<button type="submit" class="btn btn_hover text-white rounded-pill mt-3 px-5 shadow-none cake__button cake__bg_pink">К оплате</button>
+                            <div class="mt-4 text-sm text-gray font-nova policy">
+                                Нажимая на кнопку, я даю согласие на обработку и подтверждаю, что ознакомлен с условиями
+                                <a class="text-blue" target="_blank" href="{% static 'privacy-policy.pdf' %}" rel="noreferrer">
+                                    политики обработки персональных данных
+                                </a>.
+                            </div>
+                            <button type="submit" class="btn btn_hover text-white rounded-pill mt-3 px-5 shadow-none cake__button cake__bg_pink">К оплате</button>
 						</div>
 					</div>
 				</div>
