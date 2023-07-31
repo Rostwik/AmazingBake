@@ -192,8 +192,3 @@ li .cake__textinput:read-only {
 .navbar .container-md {
     display: block;
 }
-
-.container {
-    display: flex;
-    flex-direction: row;
-}

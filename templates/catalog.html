@@ -17,9 +17,11 @@
       </nav>
       <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-3 g-4">
         {% for bake in bakes %}
-        <div class="col">
+        <div class="row">
           <div class="card">
+            <div style="width: 300px;">
             <img src="{{ bake.image.url }}" class="card-img-top" alt="{{ bake.name }}">
+            </div>
             <div class="card-body">
               <h5 class="card-title">{{ bake.name }}</h5>
               <p class="card-text">{{ bake.description }}</p>
@@ -29,7 +31,6 @@
               <input value="{{ bake.id }}" type="submit"
                      class="btn text-white rounded-pill shadow-none cake__button cake__bg_pink"
                      name="bake">Купить</input>
-              </a>
             </div>
           </div>
         </div>

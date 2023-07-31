@@ -1,5 +1,5 @@
 import datetime
-
+from decimal import Decimal
 from django.contrib import messages
 from django.contrib.auth import login
 from django.contrib.auth.models import User
@@ -84,7 +84,7 @@ def index(request):
         delivery_date = datetime.datetime.strptime(order_date, '%Y-%m-%d')
         min_delivery_date = datetime.datetime.now() + datetime.timedelta(days=1)
         if delivery_date < min_delivery_date:
-            order_sum = order_sum * 1.2
+            order_sum = order_sum * Decimal(1.2)
 
         Order.objects.create(
             bake=order_bake,
