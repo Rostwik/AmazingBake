@@ -1,7 +1,7 @@
 import datetime
 from decimal import Decimal
-from django.contrib import messages
-from django.contrib.auth import login
+from django.http import HttpResponseBadRequest
+from django.contrib.auth import login, authenticate
 from django.contrib.auth.models import User
 from django.db import IntegrityError
 from django.shortcuts import render, redirect
@@ -13,44 +13,51 @@ from .forms import NewUserForm, ChangeUserDataForm
 
 
 def index(request):
-    print(request.GET)
-    bake = request.GET.get('BAKE')
-    phone = request.GET.get('PHONE')
-    email = request.GET.get('EMAIL')
-    address = request.GET.get('ADDRESS')
-    order_date = request.GET.get('DATE')
-    order_time = request.GET.get('TIME')
-    delivery_comment = request.GET.get('DELIVCOMMENTS')
-    customer_name = request.GET.get('NAME')
-    bake_levels = request.GET.get('LEVELS')
-    bake_shape = request.GET.get('FORM')
-    bake_topping = request.GET.get('TOPPING')
-    bake_berry = request.GET.get('BERRIES')
-    bake_decor = request.GET.get('DECOR')
-    bake_words = request.GET.get('WORDS')
-    order_comment = request.GET.get('COMMENTS')
-    if not order_comment:
-        order_comment = 'Позвонить за час'
+    if request.method == 'POST':
+        bake = request.POST.get('BAKE')
+        phone_number = request.POST.get('PHONE')
+        email = request.POST.get('EMAIL')
+        address = request.POST.get('ADDRESS')
+        order_date = request.POST.get('DATE')
+        order_time = request.POST.get('TIME')
+        delivery_comment = request.POST.get('DELIVCOMMENTS')
+        customer_name = request.POST.get('NAME')
+        bake_levels = request.POST.get('LEVELS')
+        bake_shape = request.POST.get('FORM')
+        bake_topping = request.POST.get('TOPPING')
+        bake_berry = request.POST.get('BERRIES')
+        bake_decor = request.POST.get('DECOR')
+        bake_words = request.POST.get('WORDS')
+        order_comment = request.POST.get('COMMENTS')
+        if not order_comment:
+            order_comment = 'Позвонить за час'
 
-    if phone:
-        customer = Customer.objects.filter(phone_number=phone)
-        if customer:
-            customer = customer[0]
-        else:
-            username, _ = email.split('@')
-            try:
-                user = User.objects.create(
+        if not request.user.is_authenticated:
+            if not email:
+                return HttpResponseBadRequest()
+
+            user = User.objects.filter(email=email).first()
+            if not user:
+                username, _ = email.split('@')
+                password = 'Password123'  # dummy plug
+                user = User(
                     username=username,
                     email=email,
                     password=email,
-                    first_name=customer_name
                 )
-                customer = Customer.objects.get(user=user)
-                print(customer)
-            except IntegrityError:
-                pass
+                user.set_password(password)
+                user.save()
+
+                user.customer.first_name = customer_name
+                user.customer.phone_number = phone_number
+                user.customer.address = address
+                user.save()
+
+            login(request, user)
+
+        customer = request.user.customer
+
         if bake:
-            print('сюда попало')
             order_bake = Bake.objects.get(name=bake)
             order_sum = order_bake.get_price()
         else:
@@ -70,14 +77,7 @@ def index(request):
                 berries=order_berries_object,
                 decor=order_decor_object
             )
-            prices = [
-                order_level_object.price,
-                order_shape_object.price,
-                order_topping_object.price,
-                order_berries_object.price,
-                order_decor_object.price
-            ]
-            order_sum = sum(prices)
+            order_sum = order_bake.get_price()
             if bake_words:
                 order_sum = order_sum + 500
 
@@ -93,8 +93,9 @@ def index(request):
             delivery_address=address,
             delivery_date=order_date,
             delivery_time=order_time,
-            total=order_sum
+            total=order_sum,
         )
+        return redirect('lk')
 
     bake_elements = {
         'levels': Level.objects.all(),
@@ -163,15 +164,12 @@ def register(request):
         if form.is_valid():
             user = form.save()
             login(request, user)
-            # messages.success(request, 'Вы успешно зарегистрировались.')
             return redirect('lk')
-        messages.error(request, 'Не удалось зарегистрироваться.')
     form = NewUserForm()
     return render(request=request, template_name='registration/register.html', context={'register_form': form})
 
 
 def catalog(request, category=None):
-    print(request.GET)
     bakes = Bake.objects.filter(kind=False)
     if category:
         bakes = bakes.filter(category=category)
@@ -186,7 +184,6 @@ def catalog(request, category=None):
 
 
 def make_catalog_order(request):
-    print(request.GET)
     bake = Bake.objects.get(pk=request.GET['bake'])
 
     context = {
