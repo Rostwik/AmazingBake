@@ -65,13 +65,6 @@
 			<span class="cake_grey fw-lighter">Уникальность и красота в пару кликов</span>
 			<a href="#step3" class="btn text-white rounded-pill px-5 mt-3 shadow-none cake__button cake__bg_pink">Создать</a>
 		</div>
-		<div class="position-fixed bottom-0 m-5 w-auto end-0">
-			<div class="d-flex">
-				<div class="cake__bg_blue rounded-pill p-3 border">
-					<img src="{% static 'img/intercom.svg' %}" alt="">
-				</div>
-			</div>
-		</div>
 	</article>
 
 	<article class="row pt-header d-flex justify-content-center" id="step2">
@@ -298,7 +291,13 @@
 								<span class="cake_pink fs_40 fw-bold me-2">Итого: {{ Cost }}₽</span>
 								{% endverbatim %}
 							</div>
-							<button type="submit" class="btn btn_hover text-white rounded-pill mt-3 px-5 shadow-none cake__button cake__bg_pink">К оплате</button>
+                            <div class="mt-4 text-sm text-gray font-nova policy">
+                                Нажимая на кнопку, я даю согласие на обработку и подтверждаю, что ознакомлен с условиями
+                                <a class="text-blue" target="_blank" href="{% static 'privacy-policy.pdf' %}" rel="noreferrer">
+                                    политики обработки персональных данных
+                                </a>.
+                            </div>
+                            <button type="submit" class="btn btn_hover text-white rounded-pill mt-3 px-5 shadow-none cake__button cake__bg_pink">К оплате</button>
 						</div>
 					</div>
 				</div>

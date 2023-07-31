@@ -27,18 +27,18 @@
               <p class="card-text">{{ bake.description }}</p>
             </div>
             <div class="card-footer">
-              <span class="card-price">{{ bake.id }}|{{ bake.get_price }} руб. </span>
+              <span class="card-price">{{ bake.get_price }} руб. </span>
               <input value="{{ bake.id }}" type="submit"
                      class="btn text-white rounded-pill shadow-none cake__button cake__bg_pink"
                      name="bake">Купить</input>
             </div>
           </div>
         </div>
-      </div>
+
         {% empty %}
         К сожалению, тут тортов нет :(
         {% endfor %}
-
+      </div>
     </form>
   </div>
 </div>

@@ -192,3 +192,6 @@ li .cake__textinput:read-only {
 .navbar .container-md {
     display: block;
 }
+.policy, .policy a {
+    font-size: 12px;
+}
