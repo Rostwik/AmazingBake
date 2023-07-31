@@ -13,6 +13,8 @@ from .forms import NewUserForm, ChangeUserDataForm
 
 
 def index(request):
+    print(request.GET)
+    bake = request.GET.get('BAKE')
     phone = request.GET.get('PHONE')
     email = request.GET.get('EMAIL')
     address = request.GET.get('ADDRESS')
@@ -27,6 +29,8 @@ def index(request):
     bake_decor = request.GET.get('DECOR')
     bake_words = request.GET.get('WORDS')
     order_comment = request.GET.get('COMMENTS')
+    if not order_comment:
+        order_comment = 'Позвонить за час'
 
     if phone:
         customer = Customer.objects.filter(phone_number=phone)
@@ -42,35 +46,41 @@ def index(request):
                     first_name=customer_name
                 )
                 customer = Customer.objects.get(user=user)
+                print(customer)
             except IntegrityError:
                 pass
+        if bake:
+            print('сюда попало')
+            order_bake = Bake.objects.get(name=bake)
+            order_sum = order_bake.get_price()
+        else:
+            order_shape_object = Shape.objects.get(id=bake_shape)
+            order_level_object = Level.objects.get(id=bake_levels)
+            order_topping_object = Topping.objects.get(id=bake_topping)
+            order_berries_object = Berry.objects.get(id=bake_berry)
+            order_decor_object = Decor.objects.get(id=bake_decor)
 
-        order_shape_object = Shape.objects.get(id=bake_shape)
-        order_level_object = Level.objects.get(id=bake_levels)
-        order_topping_object = Topping.objects.get(id=bake_topping)
-        order_berries_object = Berry.objects.get(id=bake_berry)
-        order_decor_object = Decor.objects.get(id=bake_decor)
+            order_bake = Bake.objects.create(
+                name='Торт заказной',
+                kind=True,
+                title=bake_words,
+                level=order_level_object,
+                shape=order_shape_object,
+                topping=order_topping_object,
+                berries=order_berries_object,
+                decor=order_decor_object
+            )
+            prices = [
+                order_level_object.price,
+                order_shape_object.price,
+                order_topping_object.price,
+                order_berries_object.price,
+                order_decor_object.price
+            ]
+            order_sum = sum(prices)
+            if bake_words:
+                order_sum = order_sum + 500
 
-        order_bake = Bake.objects.create(
-            name='Торт заказной',
-            kind=True,
-            title=bake_words,
-            level=order_level_object,
-            shape=order_shape_object,
-            topping=order_topping_object,
-            berries=order_berries_object,
-            decor=order_decor_object
-        )
-        prices = [
-            order_level_object.price,
-            order_shape_object.price,
-            order_topping_object.price,
-            order_berries_object.price,
-            order_decor_object.price
-        ]
-        order_sum = sum(prices)
-        if bake_words:
-            order_sum = order_sum + 500
         delivery_date = datetime.datetime.strptime(order_date, '%Y-%m-%d')
         min_delivery_date = datetime.datetime.now() + datetime.timedelta(days=1)
         if delivery_date < min_delivery_date:
@@ -86,7 +96,6 @@ def index(request):
             total=order_sum
         )
 
-    print(request.GET)
     bake_elements = {
         'levels': Level.objects.all(),
         'shapes': Shape.objects.all(),
@@ -162,6 +171,7 @@ def register(request):
 
 
 def catalog(request, category=None):
+    print(request.GET)
     bakes = Bake.objects.filter(kind=False)
     if category:
         bakes = bakes.filter(category=category)
@@ -173,3 +183,14 @@ def catalog(request, category=None):
         'categories': BakeCategory.objects.all()
     }
     return render(request=request, template_name='catalog.html', context=context)
+
+
+def make_catalog_order(request):
+    print(request.GET)
+    bake = Bake.objects.get(pk=request.GET['bake'])
+
+    context = {
+        'bake': bake,
+    }
+
+    return render(request=request, template_name='make_catalog_order.html', context=context)

@@ -4,33 +4,41 @@
 {% block title %}Каталог тортов{% endblock %}
 
 {% block content %}
-    <div class="container mt-header">
-        <h1 class="font_Gogh fs_40 cake_blue text-center mb-3">Каталог тортов {{ current_category.name|lower|default_if_none:"" }}</h1>
-        <nav class="navbar navbar-light">
-          <div class="container-md justify-content-start text-center">
-              {% for category in categories %}
-                <a href="{% url 'catalog' category.id %}" class="btn btn-outline-success me-2">{{ category.name }}</a>
-              {% endfor %}
-          </div>
-        </nav>
-        <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-3 g-4">
-            {% for bake in bakes %}
-                <div class="col">
-                  <div class="card">
-                    <img src="{{ bake.image.url }}" class="card-img-top" alt="{{ bake.name }}">
-                    <div class="card-body">
-                      <h5 class="card-title">{{ bake.name }}</h5>
-                      <p class="card-text">{{ bake.description }}</p>
-                    </div>
-                    <div class="card-footer">
-                      <span class="card-price">{{ category_id }}|{{ bake.get_price }} руб. </span>
-                      <button class="btn text-white rounded-pill shadow-none cake__button cake__bg_pink">Купить</button>
-                    </div>
-                  </div>
-                </div>
-            {% empty %}
-                К сожалению, тут тортов нет :(
-            {% endfor %}
+<div class="container">
+  <div class="mt-header">
+    <form class="row" action="/make_catalog_order/" method="get">
+      <h1 class="font_Gogh fs_40 cake_blue text-center mb-3">Каталог тортов {{ current_category.name|lower|default_if_none:"" }}</h1>
+      <nav class="navbar navbar-light">
+        <div class="container-md justify-content-start text-center">
+          {% for category in categories %}
+          <a href="{% url 'catalog' category.id %}" class="btn btn-outline-success me-2">{{ category.name }}</a>
+          {% endfor %}
         </div>
-    </div>
+      </nav>
+      <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-3 g-4">
+        {% for bake in bakes %}
+        <div class="col">
+          <div class="card">
+            <img src="{{ bake.image.url }}" class="card-img-top" alt="{{ bake.name }}">
+            <div class="card-body">
+              <h5 class="card-title">{{ bake.name }}</h5>
+              <p class="card-text">{{ bake.description }}</p>
+            </div>
+            <div class="card-footer">
+              <span class="card-price">{{ bake.id }}|{{ bake.get_price }} руб. </span>
+              <input value="{{ bake.id }}" type="submit"
+                     class="btn text-white rounded-pill shadow-none cake__button cake__bg_pink"
+                     name="bake">Купить</input>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+        {% empty %}
+        К сожалению, тут тортов нет :(
+        {% endfor %}
+
+    </form>
+  </div>
+</div>
 {% endblock %}

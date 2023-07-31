@@ -30,4 +30,5 @@ urlpatterns = [
     path('register/', views.register, name='register'),
     path('lk/', views.lk, name='lk'),
     path('admin/', admin.site.urls),
+    path('make_catalog_order/', views.make_catalog_order),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Оформление заказа{% endblock %}
+
+{% block content %}
+
+<div class="col">
+  <div class="card">
+
+    <img style="width: 25%;" src="{{ bake.image.url }}" class="card-img-top" alt="{{ bake.name }}">
+    <div class="card-body">
+      <h5 class="card-title">{{ bake.name }}</h5>
+      <p class="card-text">{{ bake.description }}</p>
+    </div>
+  </div>
+</div>
+
+<div class="row pt-header" v-if="Designed">
+  <div class="col">
+    <form class="row" action="/" method="get">
+    <div class="d-flex flex-column position-relative pb-5">
+      <h2 class="fs_40 font_Gogh cake_blue text-center align-self-center">Оформление заказа</h2>
+    </div>
+    <div class="row">
+      <div class="col-6 col-lg-4 d-flex flex-column">
+        <label for="bake" class="my-1 fs_40 cake_blue">Ваш торт</label>
+        <label for="name" class="my-1 fs_40 cake_blue">Имя</label>
+        <label for="phone" class="my-1 fs_40 cake_blue">Телефон</label>
+        <label for="email" class="my-1 fs_40 cake_blue">Почта</label>
+      </div>
+      <div class="col-6 col-lg-4 d-flex flex-column">
+        <div class="position-relative pb-1">
+          <input readonly class="form-control my-3 cake__textinput" type="text" id="bake" placeholder="Вы выбрали торт {{bake.name}}"
+                 name="BAKE" value="{{bake.name}}">
+        </div>
+        <div class="position-relative pb-1">
+          <input class="form-control my-3 cake__textinput" type="text" id="name" placeholder="Введите ваше имя"
+                 name="NAME">
+        </div>
+        <div class="position-relative pb-1">
+          <input class="form-control my-3 cake__textinput" type="tel" id="phone" placeholder="Введите номер"
+                 name="PHONE">
+          <input type="phone" class="d-none" name="phone_format"><!----></div>
+        <div class="position-relative pb-1">
+          <input class="form-control my-3 cake__textinput" type="email" id="email" placeholder="Введите почту"
+                 name="EMAIL">
+          <input type="email" class="d-none" name="email_format"><!----></div>
+      </div>
+    </div>
+    <div class="d-flex flex-column position-relative pb-4">
+      <h2 class="fs_40 cake_pink">Данные для доставки</h2>
+    </div>
+    <div class="row">
+      <div class="col-6 col-lg-4 d-flex flex-column">
+        <label for="address" class="my-1 fs_40 cake_blue">Адрес</label>
+        <label for="date" class="my-1 fs_40 cake_blue">Дата</label>
+        <label for="time" class="my-1 fs_40 cake_blue">Время</label>
+      </div>
+      <div class="col-6 col-lg-4 d-flex flex-column">
+        <input class="form-control my-3 cake__textinput" type="text" id="address" placeholder="Введите ваш адрес"
+               name="ADDRESS">
+        <input class="form-control my-3 cake__textinput" type="date" id="date" placeholder="ДД.ММ.ГГ" name="DATE">
+        <input class="form-control my-3 cake__textinput" type="time" id="time" placeholder="00:00" name="TIME">
+      </div>
+    </div>
+    <form class="row mt-3" id="order">
+      <div class="col-12 col-md-6 d-flex flex-column align-items-center align-items-md-end mt-3 mt-md-0">
+        <button type="submit"
+                class="btn btn_hover text-white rounded-pill mt-3 px-5 shadow-none cake__button cake__bg_pink">
+          Заказать
+        </button>
+      </div>
+    </form>
+    </div>
+  </div>
+
+
+{% endblock %}

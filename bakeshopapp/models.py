@@ -212,7 +212,7 @@ class Bake(models.Model):
         'Изображение торта',
         upload_to='bakes/',
         null=True,
-        blank = True,
+        blank=True,
     )
     kind = models.BooleanField(
         'Признак заказного торта',
@@ -253,13 +253,12 @@ class Bake(models.Model):
         on_delete=models.SET_NULL,
     )
 
-
     def get_price(self):
         price = self.level.price + \
-               self.shape.price + \
-               self.topping.price + \
-               self.berries.price + \
-               self.decor.price
+                self.shape.price + \
+                self.topping.price + \
+                self.berries.price + \
+                self.decor.price
         return int(price)
 
     class Meta:
