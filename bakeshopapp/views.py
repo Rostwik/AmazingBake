@@ -112,7 +112,8 @@ def index(request):
         template_name='index.html',
         context={
             'bake_elements': bake_elements,
-            'bake_elements_json': bake_elements_json
+            'bake_elements_json': bake_elements_json,
+            'categories': BakeCategory.objects.all(),
         }
     )
 
