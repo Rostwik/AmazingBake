@@ -47,10 +47,8 @@
 					<a href="#" v-if="Step === `Code`" @click.prevent="ToRegStep1" class="text-decoration-none cake_pink fs_12">изменить данные</a>
 				</div>
 				<div class="mt-4 text-sm text-gray font-nova">
-					Нажимая на кнопку, я даю
-					<a class="text-blue" target="_blank" href="https://bolshayaperemena.online/api/link/short/c3dec95174" rel="noreferrer">согласие</a>
-					на обработку и подтверждаю, что ознакомлен с условиями
-					<a class="text-blue" target="_blank" href="https://bolshayaperemena.online/api/link/short/acdb81337b" rel="noreferrer">
+					Нажимая на кнопку, я даю согласие на обработку и подтверждаю, что ознакомлен с условиями
+					<a class="text-blue" target="_blank" href="{% static 'privacy-policy.pdf' %}" rel="noreferrer">
 						политики обработки персональных данных
 					</a>.
 				</div>
