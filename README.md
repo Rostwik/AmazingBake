@@ -1,5 +1,13 @@
 # AmazingBake
 
+The website enables the operation of an online cake ordering and delivery store. The software code provides the following functionalities:
+- Custom cake creation
+- Ordering pre-made cakes from the catalog
+- Customer authentication in the personal account
+- Access to the administrative section (creating additional cake ingredients, generating links with the ability to track the number of clicks on them, exporting statistics in .csv format)
+- Client's data is stored in the database
+
+
 ## Enviroments
 
 - create the file .env and fill in this data:
@@ -61,7 +69,12 @@ $python manage.py createsuperuser"
 ```bash
 python manage.py runserver
 ```
+## Authors
 
+
+* **Andrey Alekseev** - [Andrey Alekseev](https://github.com/leksuss)
+* **Vladimir Shisterov** - [Vladimir Shisterov](https://github.com/Prikur76)
+* **Rostislav** - [Rostislav](https://github.com/Rostwik)
 
 # License
 
