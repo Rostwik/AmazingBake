@@ -17,7 +17,8 @@
 				<div class="modal-header border-0 py-0">
 					<label for="reg" class="modal-title font_Gogh fs_40 cake_blue" id="RegModalLabel">Вход / Регистрация</label>
 				</div>
-				<form class="d-none">
+				<form method="POST" class="d-none">
+                    {% csrf_token %}
 					<input v-model="RegInput" type="text" name="REG">
 					<button type="submit" ref="HiddenFormSubmitReg">reg</button>
 				</form>
@@ -178,7 +179,8 @@
 			</v-form>
 		</section>
 		<section class="row pt-header" id="step4" v-if="Designed">
-			<form class="d-none">
+			<form class="d-none" method="POST">
+                {% csrf_token %}
 				{% for level in bake_elements.levels %}
 				<input v-model="Levels" value="{{level.id}}" type="radio" name="LEVELS">
 				{% endfor %}
